@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Entities", "Shop.Entit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Repositories", "Shop.Repositories\Shop.Repositories.csproj", "{2520ABEA-2DBF-4B6C-A1E4-901E7E315519}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Data", "Shop.Data\Shop.Data.csproj", "{96197602-6B1F-41BC-8B88-7575ACD9DB77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{2520ABEA-2DBF-4B6C-A1E4-901E7E315519}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2520ABEA-2DBF-4B6C-A1E4-901E7E315519}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2520ABEA-2DBF-4B6C-A1E4-901E7E315519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96197602-6B1F-41BC-8B88-7575ACD9DB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96197602-6B1F-41BC-8B88-7575ACD9DB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96197602-6B1F-41BC-8B88-7575ACD9DB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96197602-6B1F-41BC-8B88-7575ACD9DB77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
