@@ -1,4 +1,5 @@
-﻿using Shop.Entities;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Shop.Entities;
 using Shop.Repositories;
 using Shop.Services;
 
@@ -8,16 +9,23 @@ namespace Shop.ConsoleApp
     {
         static void Main(string[] args)
         {
-            IProductRepository productRepository = new ProductRepository();
-            IProductService productService = new ProductService(productRepository);
+            var collection = new ServiceCollection();
 
-            productService.Add(new Product()
+            collection.AddScoped<IProductRepository, ProductRepository>();
+            collection.AddScoped<IBasketRepository, BasketRepository>();
+            collection.AddScoped<IProductService, ProductService>();
+
+            var serviceProvider = collection.BuildServiceProvider();
+
+            var productService = serviceProvider.GetRequiredService<IProductService>();
+
+            var id = productService.Add(new Product()
             {
                 Name = "Book",
                 Price = 1.99M
             });
 
-            var product = productService.Get(1);
+            var product = productService.Get(id);
 
             Console.WriteLine($"id: {product.Id}; name: {product.Name}");
         }
