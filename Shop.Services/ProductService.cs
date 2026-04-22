@@ -5,21 +5,21 @@ namespace Shop.Services
 {
     public class ProductService : IProductService
     {
-        public IProductRepository projectRepository;
+        public IProductRepository productRepository;
 
         public ProductService(IProductRepository productRepository)
         {
-            projectRepository = productRepository;
+            this.productRepository = productRepository;
         }
 
         public int Add(Product product)
         {
-            return projectRepository.Add(product);
+            return productRepository.Add(product);
         }
 
         public Product Get(int id)
         {
-            return projectRepository.Get(id);
+            return productRepository.Get(id);
         }
     }
 }

@@ -26,8 +26,8 @@ namespace Shop.ConsoleApp
 
                 var id = productService.Add(new Product()
                 {
-                    Name = "Book",
-                    Price = 1.99M
+                    Name = "Book2",
+                    Price = 2.99M
                 });
 
                 var product = productService.Get(id);
