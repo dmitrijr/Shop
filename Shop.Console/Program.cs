@@ -38,7 +38,9 @@ namespace Shop.ConsoleApp
 
         public static IHost BuildHost()
         {
-            var host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
+            var host = Host.CreateDefaultBuilder()
+            .UseEnvironment("Development")
+            .ConfigureServices((context, services) =>
             {
                 var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
 
