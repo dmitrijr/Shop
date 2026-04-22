@@ -33,6 +33,24 @@ namespace Shop.ConsoleApp
                 var product = productService.Get(id);
 
                 Console.WriteLine($"id: {product.Id}; name: {product.Name}");
+
+                //Uzdaviniai 1-5 test
+                var userId = 1;
+                var basketService = serviceProvider.GetRequiredService<IBasketRepository>();
+                basketService.Add(userId, product.Id, 5);
+                basketService.Add(userId, product.Id, 9);
+                basketService.Add(userId, 1, 1);
+                basketService.Add(userId, 1, 1);
+                basketService.Remove(userId, 1, 1);
+                basketService.Add(userId, 2, 3);
+                basketService.RemoveAll(userId, 2);
+                basketService.Add(userId, 2, 5);
+
+                var userBasket = basketService.Get(userId);
+                for (int productIndex = 0; productIndex < userBasket.Products.Count; productIndex++)
+                {
+                    Console.WriteLine($"User {userId} has item {userBasket.Products[productIndex].ProductId} with count {userBasket.Products[productIndex].Count}");
+                }
             }
         }
 
