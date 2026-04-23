@@ -32,6 +32,10 @@ namespace Shop.ConsoleApp
 
                 var product = productService.Get(id);
 
+                var basketService = serviceProvider.GetRequiredService<IBasketService>();
+
+                basketService.Add(1, product.Id, 10);
+
                 Console.WriteLine($"id: {product.Id}; name: {product.Name}");
             }
         }
@@ -52,6 +56,7 @@ namespace Shop.ConsoleApp
                 services.AddScoped<IProductRepository, ProductRepository>();
                 services.AddScoped<IBasketRepository, BasketRepository>();
                 services.AddScoped<IProductService, ProductService>();
+                services.AddScoped<IBasketService, BasketService>();
             });
 
             return host.Build();

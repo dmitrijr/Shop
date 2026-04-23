@@ -7,6 +7,7 @@ namespace Shop.Data
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductInBasket> ProductInBaskets { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
 
         public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options)
         {
@@ -30,7 +31,18 @@ namespace Shop.Data
                 o.HasOne(e => e.Product)
                     .WithMany(e => e.ProductInBaskets)
                     .HasForeignKey(e => e.ProductId);
+                o.HasOne(e => e.Basket)
+                    .WithMany(e => e.ProductInBaskets)
+                    .HasForeignKey(e => e.BasketId);
             });
+
+            // modelBuilder.Entity<Basket>(o =>
+            // {
+            //     o.HasKey(e => e.Id);
+            //     o.HasMany(e => e.ProductInBaskets)
+            //         .WithOne(e => e.Basket)
+            //         .HasForeignKey(e => e.BasketId);
+            // });
         }
     }
 }

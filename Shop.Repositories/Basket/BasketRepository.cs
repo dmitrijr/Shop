@@ -1,34 +1,59 @@
+using System.Reflection.Metadata;
+using Shop.Data;
 using Shop.Entities;
 
 namespace Shop.Repositories
 {
     public class BasketRepository : IBasketRepository
     {
-        private Dictionary<int, Basket> Baskets = new Dictionary<int, Basket>();
+        private readonly ShopDbContext dbContext;
+
+        public BasketRepository(ShopDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
         public int Add(int userId, int productId, int count)
         {
-            var maxId = Baskets.Keys.Any() ? Baskets.Keys.Max() : 0;
-            var newId = maxId + 1;
-            var basket = new Basket()
+            var basket = new Basket
             {
                 UserId = userId,
-                Products = new()
+                ProductInBaskets = new List<ProductInBasket>()
                 {
-                    new ProductInBasket()
+                    new ProductInBasket
                     {
-                        BasketId = newId,
                         ProductId = productId,
                         Count = count
                     }
                 }
             };
 
-            basket.Id = newId;
+            var entityEntry = dbContext.Baskets.Add(basket);
 
-            Baskets.Add(userId, basket);
+            dbContext.SaveChanges();
 
-            return basket.Id;
+            return entityEntry.Entity.Id;
+            // var maxId = Baskets.Keys.Any() ? Baskets.Keys.Max() : 0;
+            // var newId = maxId + 1;
+            // var basket = new Basket()
+            // {
+            //     UserId = userId,
+            //     ProductInBaskets = new()
+            //     {
+            //         new ProductInBasket()
+            //         {
+            //             BasketId = newId,
+            //             ProductId = productId,
+            //             Count = count
+            //         }
+            //     }
+            // };
+
+            // basket.Id = newId;
+
+            // Baskets.Add(userId, basket);
+
+            // return basket.Id;
         }
 
         public void Remove(int userId, int productId, int count)
