@@ -45,5 +45,10 @@ namespace Shop.Repositories
 
             dbContext.SaveChanges();
         }
+
+        public List<Product> Get(int page, int itemsPerPage)
+        {
+            return dbContext.Products.Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToList();
+        }
     }
 }

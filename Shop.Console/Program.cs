@@ -17,16 +17,32 @@ namespace Shop.ConsoleApp
 
             using (var scope = host.Services.CreateScope())
             {
-                var serviceProvider = scope.ServiceProvider;
+                try
+                {
+                    var serviceProvider = scope.ServiceProvider;
 
-                var dbContext = serviceProvider.GetRequiredService<ShopDbContext>();
-                dbContext.Database.Migrate();
+                    var dbContext = serviceProvider.GetRequiredService<ShopDbContext>();
+                    dbContext.Database.Migrate();
 
-                var productService = serviceProvider.GetRequiredService<IProductService>();
+                    var productService = serviceProvider.GetRequiredService<IProductService>();
 
-                productService.Delete(5);
+                    var products = productService.Get(-3, 4);
 
-                Console.WriteLine($"product deleted");
+                    foreach (var product in products)
+                    {
+                        Console.WriteLine($"Id: {product.Id}; price: {product.Price}");
+                    }
+
+                    if (!products.Any())
+                    {
+                        Console.WriteLine("Empty list");
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
         }
 
