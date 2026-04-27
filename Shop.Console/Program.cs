@@ -24,19 +24,9 @@ namespace Shop.ConsoleApp
 
                 var productService = serviceProvider.GetRequiredService<IProductService>();
 
-                var id = productService.Add(new Product()
-                {
-                    Name = "Book2",
-                    Price = 2.99M
-                });
+                productService.Delete(5);
 
-                var product = productService.Get(id);
-
-                var basketService = serviceProvider.GetRequiredService<IBasketService>();
-
-                basketService.Add(1, product.Id, 10);
-
-                Console.WriteLine($"id: {product.Id}; name: {product.Name}");
+                Console.WriteLine($"product deleted");
             }
         }
 

@@ -12,14 +12,24 @@ namespace Shop.Services
             this.productRepository = productRepository;
         }
 
-        public int Add(Product product)
+        public int Create(Product product)
         {
-            return productRepository.Add(product);
+            return productRepository.Create(product);
         }
 
         public Product Get(int id)
         {
             return productRepository.Get(id);
+        }
+
+        public void Update(Product product)
+        {
+            productRepository.Update(product);
+        }
+
+        public void Delete(int id)
+        {
+            productRepository.Delete(id);
         }
     }
 }
