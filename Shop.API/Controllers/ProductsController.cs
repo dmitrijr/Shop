@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Entities;
 using Shop.Services;
+using Shop.Services.Models;
 
 namespace Shop.API.Controllers
 {
@@ -24,6 +25,12 @@ namespace Shop.API.Controllers
         public ActionResult<Product> Get(int id)
         {
             return productService.Get(id);
+        }
+
+        [HttpPost]
+        public ActionResult<int> Create(CreateProduct product)
+        {
+            return productService.Create(product);
         }
     }
 }
