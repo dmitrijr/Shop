@@ -22,15 +22,19 @@ namespace Shop.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Product> Get(int id)
+        public IActionResult Get(int id)
         {
-            return productService.Get(id);
+            var product = productService.Get(id);
+            if (product == null)
+                return NotFound();
+
+            return Ok(product);
         }
 
         [HttpPost]
-        public ActionResult<int> Create(CreateProduct product)
+        public IActionResult Create(CreateProduct product)
         {
-            return productService.Create(product);
+            return Created("/", productService.Create(product));
         }
     }
 }
