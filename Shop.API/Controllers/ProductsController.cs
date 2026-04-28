@@ -15,9 +15,15 @@ namespace Shop.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Product>> GetAll()
+        public ActionResult<List<Product>> GetAll(int page, int itemsPerPage)
         {
-            return productService.Get(1, 4);
+            return productService.Get(page, itemsPerPage);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Product> Get(int id)
+        {
+            return productService.Get(id);
         }
     }
 }
