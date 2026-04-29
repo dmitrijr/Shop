@@ -10,8 +10,13 @@ namespace Shop.Services.Tests
         {
             var productRepositoryMock = new Mock<IProductRepository>();
             productRepositoryMock
-                .Setup(o => o.Get(It.IsAny<int>(), It.IsAny<int>()))
-                .Returns(new List<Entities.Product>());
+                .Setup(o => o.Get(It.IsAny<int>(), 3))
+                .Returns(new List<Entities.Product>()
+                {
+                    new Entities.Product(),
+                    new Entities.Product(),
+                    new Entities.Product(),
+                });
 
             var productService = new ProductService(productRepositoryMock.Object);
 
