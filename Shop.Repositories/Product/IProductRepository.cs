@@ -7,7 +7,7 @@ namespace Shop.Repositories
         int Create(Product product);
         Product Get(int id);
         void Update(Product product);
-        void Delete(int id);
+        Task DeleteAsync(int id);
         Task<List<Product>> GetAsync(int page, int itemsPerPage);
     }
 }

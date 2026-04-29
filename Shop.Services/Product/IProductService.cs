@@ -8,7 +8,7 @@ namespace Shop.Services
         int Create(CreateProduct product);
         Product Get(int id);
         void Update(Product createProduct);
-        void Delete(int id);
+        Task DeleteAsync(int id);
         Task<List<Product>> GetAsync(int page, int itemsPerPage);
     }
 }

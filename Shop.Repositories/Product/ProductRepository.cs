@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data;
 using Shop.Entities;
@@ -34,16 +35,11 @@ namespace Shop.Repositories
             dbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            // var product = Get(id);
+            await dbContext.Products.Where(o => o.Id == id).ExecuteDeleteAsync();
 
-            // dbContext.Products.Remove(product);
-            // dbContext.SaveChanges();
-
-            dbContext.Products.Where(o => o.Id == id).ExecuteDelete();
-
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<List<Product>> GetAsync(int page, int itemsPerPage)

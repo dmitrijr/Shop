@@ -38,9 +38,9 @@ namespace Shop.Services
             productRepository.Update(product);
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            productRepository.Delete(id);
+            await productRepository.DeleteAsync(id);
         }
 
         public async Task<List<Product>> GetAsync(int page, int itemsPerPage)
