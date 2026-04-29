@@ -5,23 +5,34 @@ namespace Shop.Services.Tests
 {
     public class ProductsServiceTests
     {
-        [Fact]
-        public void Get_ReturnsThreeItemsPerPage()
+        [Theory]
+        [InlineData(3, 3)]
+        [InlineData(0, 10)]
+        [InlineData(-14, 10)]
+        [InlineData(20, 20)]
+        public void Get_ExpectedDefaultItemsPerPage(int itemsPerPage, int expectedResult)
         {
+            var realItemsPerPage = itemsPerPage;
+            if (itemsPerPage <= 0)
+                realItemsPerPage = ProductService.DefaultItemsPerPage;
+
             var productRepositoryMock = new Mock<IProductRepository>();
             productRepositoryMock
-                .Setup(o => o.Get(It.IsAny<int>(), 3))
-                .Returns(new List<Entities.Product>()
+                .Setup(o => o.Get(It.IsAny<int>(), realItemsPerPage))
+                .Returns(() =>
                 {
-                    new Entities.Product(),
-                    new Entities.Product(),
-                    new Entities.Product(),
+                    var products = new List<Entities.Product>();
+
+                    for (int i = 0; i < realItemsPerPage; i++)
+                        products.Add(new Entities.Product());
+
+                    return products;
                 });
 
             var productService = new ProductService(productRepositoryMock.Object);
 
-            var actualProducts = productService.Get(1, 3);
-            Assert.Equal(3, actualProducts.Count);
+            var actualProducts = productService.Get(1, itemsPerPage);
+            Assert.Equal(expectedResult, actualProducts.Count);
         }
     }
 }
