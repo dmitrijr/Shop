@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Entities;
 using Shop.Services;
@@ -16,9 +17,9 @@ namespace Shop.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Product>> GetAll(int page, int itemsPerPage)
+        public async Task<ActionResult<List<Product>>> GetAllAsync(int page, int itemsPerPage)
         {
-            return productService.Get(page, itemsPerPage);
+            return await productService.GetAsync(page, itemsPerPage);
         }
 
         [HttpGet("{id}")]

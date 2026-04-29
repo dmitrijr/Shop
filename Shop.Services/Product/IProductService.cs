@@ -9,6 +9,6 @@ namespace Shop.Services
         Product Get(int id);
         void Update(Product createProduct);
         void Delete(int id);
-        List<Product> Get(int page, int itemsPerPage);
+        Task<List<Product>> GetAsync(int page, int itemsPerPage);
     }
 }

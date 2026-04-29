@@ -8,6 +8,6 @@ namespace Shop.Repositories
         Product Get(int id);
         void Update(Product product);
         void Delete(int id);
-        List<Product> Get(int page, int itemsPerPage);
+        Task<List<Product>> GetAsync(int page, int itemsPerPage);
     }
 }

@@ -46,9 +46,9 @@ namespace Shop.Repositories
             dbContext.SaveChanges();
         }
 
-        public List<Product> Get(int page, int itemsPerPage)
+        public async Task<List<Product>> GetAsync(int page, int itemsPerPage)
         {
-            return dbContext.Products.Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToList();
+            return await dbContext.Products.Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToListAsync();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Shop.Entities;
 using Shop.Repositories;
 using Shop.Services.Models;
@@ -42,7 +43,7 @@ namespace Shop.Services
             productRepository.Delete(id);
         }
 
-        public List<Product> Get(int page, int itemsPerPage)
+        public async Task<List<Product>> GetAsync(int page, int itemsPerPage)
         {
             if (page <= 0)
                 page = 1;
@@ -50,7 +51,7 @@ namespace Shop.Services
             if (itemsPerPage <= 0)
                 itemsPerPage = DefaultItemsPerPage;
 
-            return productRepository.Get(page, itemsPerPage);
+            return await productRepository.GetAsync(page, itemsPerPage);
         }
     }
 }
