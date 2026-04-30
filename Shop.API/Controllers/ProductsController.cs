@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Entities;
 using Shop.Services;
@@ -6,6 +6,8 @@ using Shop.Services.Models;
 
 namespace Shop.API.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
     {
