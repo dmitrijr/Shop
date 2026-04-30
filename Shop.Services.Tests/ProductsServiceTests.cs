@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Moq;
 using Shop.Repositories;
 
@@ -10,7 +11,7 @@ namespace Shop.Services.Tests
         [InlineData(0, 10)]
         [InlineData(-14, 10)]
         [InlineData(20, 20)]
-        public void Get_ExpectedDefaultItemsPerPage(int itemsPerPage, int expectedResult)
+        public async Task Get_ExpectedDefaultItemsPerPage(int itemsPerPage, int expectedResult)
         {
             var realItemsPerPage = itemsPerPage;
             if (itemsPerPage <= 0)
@@ -18,8 +19,8 @@ namespace Shop.Services.Tests
 
             var productRepositoryMock = new Mock<IProductRepository>();
             productRepositoryMock
-                .Setup(o => o.Get(It.IsAny<int>(), realItemsPerPage))
-                .Returns(() =>
+                .Setup(o => o.GetAsync(It.IsAny<int>(), realItemsPerPage))
+                .ReturnsAsync(() =>
                 {
                     var products = new List<Entities.Product>();
 
@@ -31,7 +32,7 @@ namespace Shop.Services.Tests
 
             var productService = new ProductService(productRepositoryMock.Object);
 
-            var actualProducts = productService.Get(1, itemsPerPage);
+            var actualProducts = await productService.GetAsync(1, itemsPerPage);
             Assert.Equal(expectedResult, actualProducts.Count);
         }
     }
