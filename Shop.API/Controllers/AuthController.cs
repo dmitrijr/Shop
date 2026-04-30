@@ -22,9 +22,25 @@ namespace Shop.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest loginRequest)
         {
+            if (loginRequest.Username == "admin" && loginRequest.Password == "Test1234!")
+            {
+                var claims = new List<Claim>();
+                claims.Add(new Claim("admin", "true"));
+                claims.Add(new Claim("user", "true"));
+
+                var response = new
+                {
+                    AccessToken = tokenService.GenerateAccessToken(claims),
+                    RefreshToken = tokenService.GenerateRefreshToken()
+                };
+
+                return Ok(response);
+            }
+
             if (loginRequest.Username == "user" && loginRequest.Password == "Test1234!")
             {
                 var claims = new List<Claim>();
+                claims.Add(new Claim("user", "true"));
 
                 var response = new
                 {
