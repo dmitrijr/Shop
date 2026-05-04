@@ -10,4 +10,8 @@
     <ProjectReference Include="../Shop.Repositories/Shop.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.0" />
+  </ItemGroup>
+
 </Project>

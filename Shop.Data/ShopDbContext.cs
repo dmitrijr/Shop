@@ -8,6 +8,7 @@ namespace Shop.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductInBasket> ProductInBaskets { get; set; }
         public DbSet<Basket> Baskets { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options)
         {
@@ -34,6 +35,14 @@ namespace Shop.Data
                 o.HasOne(e => e.Basket)
                     .WithMany(e => e.ProductInBaskets)
                     .HasForeignKey(e => e.BasketId);
+            });
+
+            modelBuilder.Entity<User>(o =>
+            {
+                o.HasKey(e => e.Id);
+                o.Property(e => e.Username).IsRequired();
+                o.Property(e => e.PasswordHash).IsRequired();
+                o.HasIndex(e => e.Username).IsUnique();
             });
 
             // modelBuilder.Entity<Basket>(o =>
